@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.UI;
 public class DataCollector : MonoBehaviour
 {
+    [SerializeField]private Color[] colors;
     public string nameStar
     {
         get; private set;
@@ -55,9 +56,9 @@ public class DataCollector : MonoBehaviour
     }
 
 
-    [SerializeField] private TMP_InputField[] nameInput = new TMP_InputField[2];
-    [SerializeField] private TMP_InputField[] massInput = new TMP_InputField[2];
-    [SerializeField] private TMP_Dropdown[] ColorSelection = new TMP_Dropdown[2];
+    [SerializeField] private TMP_InputField[] nameInput = new TMP_InputField[2]; //Abstraction
+    [SerializeField] private TMP_InputField[] massInput = new TMP_InputField[2]; // Abstraction
+    [SerializeField] private TMP_Dropdown[] ColorSelection = new TMP_Dropdown[2];// Abstraction
     public void StartButton()
     {
         
@@ -78,27 +79,36 @@ public class DataCollector : MonoBehaviour
 
     private Color ColorDef(int index)
     {
-        if(index == 0)
+        /* if(index == 0)
+         {
+             return Color.red;
+         }
+         else if(index == 1)
+         {
+             return Color.green;
+         }
+         else if (index == 2)
+         {
+             return Color.blue;
+         }
+         else if (index == 3)
+         {
+             return Color.yellow;
+         }else if(index == 4)
+         {
+             return Color.white;
+         }
+         else
+         {
+             return Color.black;
+         }*/  //--> Abstraction
+        if (index >= 0 && index < colors.Length)
         {
-            return Color.red;
-        }
-        else if(index == 1)
-        {
-            return Color.green;
-        }
-        else if (index == 2)
-        {
-            return Color.blue;
-        }
-        else if (index == 3)
-        {
-            return Color.yellow;
-        }else if(index == 4)
-        {
-            return Color.white;
+            return colors[index];
         }
         else
         {
+            Debug.LogWarning("Index out of range. Returning default color (black).");
             return Color.black;
         }
     }
